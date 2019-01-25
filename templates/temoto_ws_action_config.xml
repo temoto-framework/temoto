@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<f_template extension=".yaml">
+
+  <arg name="temoto_ws_name" default="temoto_ws_noname" />
+  <body>
+
+<![CDATA[core_actions:
+  - package_name: temoto_core
+  - relative_path: actions/
+
+user_actions:
+  - package_name: $(arg temoto_ws_name)
+  - relative_path: actions/
+
+]]>
+
+  </body>
+
+</f_template>
