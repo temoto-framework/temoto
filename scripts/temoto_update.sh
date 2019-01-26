@@ -17,8 +17,8 @@ update_from_source () {
   # Update if found
   if [[ ! -z $PACKAGE_PATH ]]; then
     echo -e $RESET$GREEN"* Updating the" $BOLD$PACKAGE_NAME$RESET$GREEN "package" $RESET
-    #cd $PACKAGE_PATH
-    #git pull
+    cd $PACKAGE_PATH
+    git pull
   else
     echo -e $RESET$RED"* Could not find the" $BOLD$PACKAGE_NAME$RESET$RED "package"$RESET
   fi 
