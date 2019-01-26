@@ -1,24 +1,22 @@
-#include "ros/ros.h"
 #include "ros/package.h"
 #include "file_template_parser/file_template_parser.h"
 #include <boost/filesystem.hpp>
+#include <iostream>
 
 int main(int argc, char **argv)
 {
-  std::cout << "d1\n";
   // Check if arguments were provided
   if (argc != 2)
   {
-    std::cout << "d2\n";
     std::cout << "Invalid number of arguments" << std::endl;
     return 1;
   }
 
-  std::cout << "d3\n";
   // Get the name of the package
   const std::string temoto_ws_name = std::string(argv[1]);
   const std::string base_path = ros::package::getPath(ROS_PACKAGE_NAME);
-  const std::string temoto_ws_path = base_path + "/../" + temoto_ws_name + "/";
+  const std::string temoto_ws_path = base_path + "/../../" + temoto_ws_name + "/";
+  const std::string temoto_ws_package_path = temoto_ws_path + temoto_ws_name + "/";
 
   // Import the CMakeLists template
   tp::TemplateContainer t_cmakelists = tp::TemplateContainer(base_path + "/templates/temoto_ws_cmakelists.xml");
@@ -31,13 +29,15 @@ int main(int argc, char **argv)
 
   /*
    * CREATE TEMOTO WS PACKAGE DIRECTORY STRUCTURE
-   */ 
+   */
+  std::cout << "* Creating package folder structure" << std::endl; 
   boost::filesystem::create_directories(temoto_ws_path + "actions");
-  boost::filesystem::create_directories(temoto_ws_path + "config");
+  boost::filesystem::create_directories(temoto_ws_package_path + "config");
 
   /*
    * GENERATE THE CONTENT
    */
+  std::cout << "* Parsing arguments" << std::endl;
   t_cmakelists.setArgument("temoto_ws_name", temoto_ws_name);
   t_packagexml.setArgument("temoto_ws_name", temoto_ws_name);
   t_action_config.setArgument("temoto_ws_name", temoto_ws_name);
@@ -45,9 +45,13 @@ int main(int argc, char **argv)
   /*
    * SAVE THE CONTENT
    */
-  t_cmakelists.processAndSaveTemplate(temoto_ws_path, "CMakeLists");
-  t_packagexml.processAndSaveTemplate(temoto_ws_path, "package");
-  t_action_config.processAndSaveTemplate(temoto_ws_path + "/config/", "action_dst");
+  std::cout << "* Generating the package content" << std::endl;
+  t_cmakelists.processAndSaveTemplate(temoto_ws_package_path, "CMakeLists");
+  t_packagexml.processAndSaveTemplate(temoto_ws_package_path, "package");
+  t_action_config.processAndSaveTemplate(temoto_ws_package_path + "/config/", "action_dst");
+
+  std::cout << "* Finished generating a TeMoto workspace '" << temoto_ws_name 
+            << "' to " << temoto_ws_path << std::endl;
 
   return 0;
 }

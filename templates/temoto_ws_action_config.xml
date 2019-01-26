@@ -11,7 +11,7 @@
 
 user_actions:
   - package_name: $(arg temoto_ws_name)
-  - relative_path: actions/
+  - relative_path: ../actions/
 
 ]]>
 

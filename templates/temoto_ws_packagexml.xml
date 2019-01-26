@@ -15,7 +15,10 @@
   <!-- Authors do not have to be maintainers, but could be -->
   <!-- Example: -->
   <!-- <author email="jane.doe@example.com">Jane Doe</author> -->
+  
+  <maintainer email="todo@todo.todo">todo</maintainer>
 
+  <license>TODO</license>
 
   <!-- The *depend tags are used to specify dependencies -->
   <!-- Dependencies can be catkin packages or system dependencies -->
@@ -41,13 +44,13 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>roscpp</build_depend>>
-	<build_depend>rospy</build_depend>
+  <build_depend>rospy</build_depend>
   <build_depend>temoto</build_depend>
   <build_depend>temoto_action_assistant</build_depend>
 
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
-	<exec_depend>temoto</exec_depend>
+  <exec_depend>temoto</exec_depend>
   <exec_depend>temoto_action_assistant</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
