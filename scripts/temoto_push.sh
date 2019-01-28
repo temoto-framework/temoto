@@ -20,7 +20,7 @@ git_push () {
   if [[ ! -z $PACKAGE_PATH ]]; then
     echo -e $BOLD"* $PACKAGE_NAME package:"$RESET;
     if [ -n "$(git status --porcelain)" ]; then
-      echo -e $GREEN"  - Found changes, commiting with message: '$2""'" $RESET;
+      echo -e $GREEN"  - Found changes, commiting with message: $2" $RESET;
       git add -A
       git commit -m "$2"
       git push
@@ -34,12 +34,14 @@ git_push () {
 
 PREV_DIR=$(pwd)
 
-git_push temoto $1
-git_push temoto_core $1
-git_push temoto_er_manager $1
-git_push temoto_nlp $1
-git_push temoto_action_assistant $1
-git_push temoto_sensor_manager $1
+echo $1
+
+git_push temoto "$1"
+git_push temoto_core "$1"
+git_push temoto_er_manager "$1"
+git_push temoto_nlp "$1"
+git_push temoto_action_assistant "$1"
+git_push temoto_sensor_manager "$1"
 
 cd $PREV_DIR
 
