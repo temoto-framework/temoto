@@ -7,8 +7,6 @@ BOLD="\e[1m"
 NL="\n"
 RESET="\e[39m\e[0m"
 
-ROS_VERSION="kinetic"
-
 # Usage: git_push <package_name> <commit_message> 
 git_push () {
   PACKAGE_NAME=$1
@@ -16,32 +14,90 @@ git_push () {
 
   cd $PACKAGE_PATH
 
-  # Push if found
+  # Proceed if the package was found
   if [[ ! -z $PACKAGE_PATH ]]; then
-    echo -e $BOLD"* $PACKAGE_NAME package:"$RESET;
+    echo -e -n $BOLD$GREEN"* $PACKAGE_NAME package: "$RESET;
+
+    # Check if there are any changes in the repo
     if [ -n "$(git status --porcelain)" ]; then
-      echo -e $GREEN"  - Found changes, commiting with message: $2" $RESET;
+      echo -e $GREEN"Found changes" $RESET;
+
+      # List the tracked files
+      echo -e $GREEN"  Modified files:" $RESET;
+      MOD_FILES=$(git ls-files -m)
+      for file in $MOD_FILES
+      do
+        echo "    $file"
+      done
+
+      # List the untracked files
+      echo -e $GREEN"  Untracked files:"$RESET
+      UNTRACKED_FILES=$(git ls-files . --exclude-standard --others)
+      for file in $UNTRACKED_FILES
+      do
+        echo "    $file"
+      done
+
+      # Ask if the user is sure
+      echo -e -n $NL$YELLOW$BOLD"  Add all and push? (y/n)" $RESET
+      read -p " " -n 1 -r
+      echo
+
+      # If the user replied "y" or "Y"
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo -n
+      else
+        echo -e $YELLOW"  Doing nothing."$RESET $NL;
+        return
+      fi
+
+      # Ask about the default message
+      echo -e $YELLOW"  Default commit message: $2" $RESET
+      echo -e -n $YELLOW$BOLD"  Use the default message? (y/n)" $RESET
+      read -p " " -n 1 -r
+      echo
+
+      # If the user replied "y" or "Y"
+      CM=""
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        CM=$2
+      else
+        read -p "  Please enter the commit message: "  msg
+        CM=$msg
+      fi
+
+      # Do the git magic
       git add -A
-      git commit -m "$2"
+      git commit -m "$CM"
       git push
+      
     else
-      echo -e $YELLOW"  - No changes."$RESET;
+      echo -e $YELLOW"No changes."$RESET;
     fi
   else
     echo -e $RESET$RED"* Could not find the" $BOLD$PACKAGE_NAME$RESET$RED "package"$RESET
   fi 
 }
 
+COMMIT_MESSAGE=""
+
+# Check if commit message was provided
+if [ -z "$1" ]; then
+  read -p "Please enter the commit message: "  MSG
+  COMMIT_MESSAGE=$MSG
+else
+  COMMIT_MESSAGE=$1
+fi
+
+# Save the current directory
 PREV_DIR=$(pwd)
 
-echo $1
-
-git_push temoto "$1"
-git_push temoto_core "$1"
-git_push temoto_er_manager "$1"
-git_push temoto_nlp "$1"
-git_push temoto_action_assistant "$1"
-git_push temoto_sensor_manager "$1"
+git_push temoto "$COMMIT_MESSAGE"
+git_push temoto_core "$COMMIT_MESSAGE"
+git_push temoto_er_manager "$COMMIT_MESSAGE"
+git_push temoto_nlp "$COMMIT_MESSAGE"
+git_push temoto_action_assistant "$COMMIT_MESSAGE"
+git_push temoto_sensor_manager "$COMMIT_MESSAGE"
 
 cd $PREV_DIR
 
