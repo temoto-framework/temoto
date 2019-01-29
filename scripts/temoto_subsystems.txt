@@ -1,0 +1,6 @@
+temoto
+temoto_core
+temoto_er_manager
+temoto_nlp
+temoto_action_assistant
+temoto_component_manager

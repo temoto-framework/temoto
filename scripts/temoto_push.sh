@@ -92,13 +92,14 @@ fi
 # Save the current directory
 PREV_DIR=$(pwd)
 
-git_push temoto "$COMMIT_MESSAGE"
-git_push temoto_core "$COMMIT_MESSAGE"
-git_push temoto_er_manager "$COMMIT_MESSAGE"
-git_push temoto_nlp "$COMMIT_MESSAGE"
-git_push temoto_action_assistant "$COMMIT_MESSAGE"
-git_push temoto_sensor_manager "$COMMIT_MESSAGE"
+# Open the subsystems file
+TEMOTO_SUBSYS_FILE=$(rospack find temoto)/scripts/temoto_subsystems.txt
+SUBSYSTEM_NAMES=$(cat  $TEMOTO_SUBSYS_FILE |tr "\n" " ")
+
+for subsys_name in $SUBSYSTEM_NAMES 
+do
+  git_push $subsys_name "$COMMIT_MESSAGE"
+done
 
 cd $PREV_DIR
-
 echo -e $NL"Done."

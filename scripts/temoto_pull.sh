@@ -26,12 +26,14 @@ update_from_source () {
 
 PREV_DIR=$(pwd)
 
-update_from_source temoto
-update_from_source temoto_core
-update_from_source temoto_er_manager
-update_from_source temoto_nlp
-update_from_source temoto_action_assistant
-update_from_source temoto_sensor_manager
+# Open the subsystems file
+TEMOTO_SUBSYS_FILE=$(rospack find temoto)/scripts/temoto_subsystems.txt
+SUBSYSTEM_NAMES=$(cat  $TEMOTO_SUBSYS_FILE |tr "\n" " ")
+
+for subsys_name in $SUBSYSTEM_NAMES 
+do
+  update_from_source $subsys_name
+done
 
 cd $PREV_DIR
 

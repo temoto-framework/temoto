@@ -71,12 +71,18 @@ fi
 PREV_DIR=$(pwd)
 cd $CW_DIR/$SUBFOLDER
 
-# Get TeMoto packages from github
-find_install_from_source temoto_core https://github.com/temoto-telerobotics/temoto_core.git
-find_install_from_source temoto_er_manager https://github.com/temoto-telerobotics/temoto_er_manager.git
-find_install_from_source temoto_nlp https://github.com/temoto-telerobotics/temoto_nlp.git
-find_install_from_source temoto_action_assistant https://github.com/temoto-telerobotics/temoto_action_assistant.git
-find_install_from_source temoto_sensor_manager https://github.com/temoto-telerobotics/temoto_sensor_manager.git
+# Open the subsystems file
+TEMOTO_SUBSYS_FILE=$(rospack find temoto)/scripts/temoto_subsystems.txt
+SUBSYSTEM_NAMES=$(cat  $TEMOTO_SUBSYS_FILE |tr "\n" " ")
+
+for subsys_name in $SUBSYSTEM_NAMES 
+do
+  if [[ $subsys_name == "temoto" ]]; then
+    continue
+  fi
+  # Download temoto repositories
+  find_install_from_source $subsys_name https://github.com/temoto-telerobotics/$subsys_name.git
+done
 
 cd $PREV_DIR
 echo -e $NL"Dependencies are installed, you are good to go."
