@@ -14,6 +14,7 @@ NEW_STUFF_INSTALLED=0
 find_install_from_source () {
   PACKAGE_NAME=$1
   PACKAGE_PATH=$2
+  SUBFOLDER_NAME=$3
 
   # Look for the package
   rospack find $PACKAGE_NAME &> /dev/null
@@ -22,8 +23,10 @@ find_install_from_source () {
   if [[ $? = 0 ]]; then
     echo -e $GREEN$BOLD"*" $PACKAGE_NAME $RESET$GREEN"package is already installed."$RESET
   else
-    # Clone the rviz_plugin_manager package
-    echo -e $RESET$GREEN"Cloning the" $PACKAGE_NAME "package to"$BOLD $CW_DIR/$SUBFOLDER $RESET
+    # Clone the package
+    PTH=$CW_DIR/$SUBFOLDER_NAME
+    cd $PTH
+    echo -e $RESET$GREEN"Cloning the" $PACKAGE_NAME "package to"$BOLD $PTH $RESET
     git clone $PACKAGE_PATH
     NEW_STUFF_INSTALLED=1
   fi 
@@ -112,7 +115,7 @@ do
     continue
   fi
   # Download temoto repositories
-  find_install_from_source $subsys_name https://github.com/temoto-telerobotics/$subsys_name.git
+  find_install_from_source $subsys_name https://github.com/temoto-telerobotics/$subsys_name.git $SUBFOLDER
 done
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -120,7 +123,10 @@ done
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if [[ -z $TEMOTO_ALIASES_SET ]]; then
-  echo -e -n $NL"Export TeMoto script shortcuts? (y/n)" $RESET
+  echo -e $NL"Export TeMoto script aliases?" $RESET
+  echo -e " - temoto_pull: updates TeMoto packages" $RESET
+  echo -e " - temoto_push: pushes local TeMoto package changes to upstream" $RESET
+  echo -e -n "(y/n)" $RESET
   read -p " " -n 1 -r
   echo
 
