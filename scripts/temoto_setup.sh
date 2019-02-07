@@ -27,7 +27,7 @@ find_install_from_source () {
     PTH=$CW_DIR/$SUBFOLDER_NAME
     cd $PTH
     echo -e $RESET$GREEN"Cloning the" $PACKAGE_NAME "package to"$BOLD $PTH $RESET
-    git clone $PACKAGE_PATH
+    git clone --recurse-submodules $PACKAGE_PATH
     NEW_STUFF_INSTALLED=1
   fi 
 }
