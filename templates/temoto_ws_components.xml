@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<f_template extension=".yaml">
+
+  <arg name="temoto_ws_name" default="temoto_ws_noname" />
+  <body>
+
+<![CDATA[Components:
+- component_name: "TeMoto NL Terminal"
+  component_type: "human chatter"
+  package_name: "temoto_nlp"
+  executable:  "nl_terminal.launch"
+  output_topics:
+    chatter_data: "human_chatter"
+]]>
+
+  </body>
+
+</f_template>

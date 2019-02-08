@@ -6,7 +6,7 @@
   <body>
 
 <![CDATA[- package_name: temoto_core
-  relative_path: actions/
+  relative_path: ../actions/
 
 - package_name: $(arg temoto_ws_name)
   relative_path: ../actions/

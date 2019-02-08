@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="temoto_namespace" default="$(anon temoto)" />
+  <arg name="action_paths" default="$(find temoto_core)/config/action_dst.yaml" />
 
   <!--env name="ROSCONSOLE_FORMAT" value="${logger} [${function}] ${message}" /-->
   <env name="ROSCONSOLE_FORMAT" value="[${function}] ${message}" />
@@ -8,8 +9,8 @@
 
   <group ns="$(arg temoto_namespace)">
     <node name="temoto_er_manager" pkg="temoto_er_manager" type="temoto_er_manager" output="screen" />
-    <node name="temoto_sensor_manager" pkg="temoto_sensor_manager" type="temoto_sensor_manager" output="screen" />
-    <node name="temoto_nlp_interface" pkg="temoto_nlp" type="temoto_nlp_interface" output="screen" />
+    <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen" />
+    <node name="temoto_nlp_interface" pkg="temoto_nlp" type="temoto_nlp_interface" args="$(arg action_paths)" output="screen" />
   </group>
 
 </launch>
