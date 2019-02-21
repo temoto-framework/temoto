@@ -124,6 +124,7 @@ done
 
 if [[ -z $TEMOTO_ALIASES_SET ]]; then
   echo -e $NL"Export TeMoto script aliases?" $RESET
+  echo -e " - temoto_status: Checks the status of TeMoto packages" $RESET
   echo -e " - temoto_pull: updates TeMoto packages" $RESET
   echo -e " - temoto_push: pushes local TeMoto package changes to upstream" $RESET
   echo -e -n "(y/n)" $RESET
@@ -134,6 +135,7 @@ if [[ -z $TEMOTO_ALIASES_SET ]]; then
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "" >> ~/.bashrc
     echo "# TeMoto aliases" >> ~/.bashrc
+    echo "alias temoto_status='bash $(rospack find temoto)/scripts/temoto_status.sh'" >> ~/.bashrc
     echo "alias temoto_pull='bash $(rospack find temoto)/scripts/temoto_pull.sh'" >> ~/.bashrc
     echo "alias temoto_push='bash $(rospack find temoto)/scripts/temoto_push.sh'" >> ~/.bashrc
     echo "export TEMOTO_ALIASES_SET=1" >> ~/.bashrc
