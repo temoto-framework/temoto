@@ -5,3 +5,4 @@ temoto_nlp
 temoto_action_assistant
 temoto_component_manager
 temoto_context_manager
+temoto_test_suite

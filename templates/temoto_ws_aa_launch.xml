@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+
+<f_template extension=".launch">
+
+  <arg name="temoto_ws_name" default="temoto_ws_noname" />
+  <body>
+
+<![CDATA[<launch>
+  <include file="$(find temoto_action_assistant)/launch/action_assistant.launch">
+    <arg name="ta_path" value="$(find $(arg temoto_ws_name))/../actions" />
+  </include>
+</launch>
+
+]]>
+
+  </body>
+
+</f_template>

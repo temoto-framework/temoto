@@ -25,6 +25,7 @@ int main(int argc, char **argv)
   tp::TemplateContainer t_packagexml = tp::TemplateContainer(base_path + "/templates/temoto_ws_packagexml.xml");
   tp::TemplateContainer t_action_config = tp::TemplateContainer(base_path + "/templates/temoto_ws_action_config.xml");
   tp::TemplateContainer t_nlp_launch = tp::TemplateContainer(base_path + "/templates/temoto_ws_nlp_launch.xml");
+  tp::TemplateContainer t_aa_launch = tp::TemplateContainer(base_path + "/templates/temoto_ws_aa_launch.xml");
   tp::TemplateContainer t_components = tp::TemplateContainer(base_path + "/templates/temoto_ws_components.xml");
 
   /*
@@ -43,6 +44,7 @@ int main(int argc, char **argv)
   t_packagexml.setArgument("temoto_ws_name", temoto_ws_name);
   t_action_config.setArgument("temoto_ws_name", temoto_ws_name);
   t_nlp_launch.setArgument("temoto_ws_name", temoto_ws_name);
+  t_aa_launch.setArgument("temoto_ws_name", temoto_ws_name);
   t_components.setArgument("temoto_ws_name", temoto_ws_name);
 
   /*
@@ -53,6 +55,7 @@ int main(int argc, char **argv)
   t_packagexml.processAndSaveTemplate(temoto_ws_package_path, "package");
   t_action_config.processAndSaveTemplate(temoto_ws_package_path + "/config/", "action_dst");
   t_nlp_launch.processAndSaveTemplate(temoto_ws_package_path + "/launch/", "temoto_nlp");
+  t_aa_launch.processAndSaveTemplate(temoto_ws_package_path + "/launch/", "action_assistant");
   t_components.processAndSaveTemplate(temoto_ws_package_path, "components");
 
   std::cout << "* Finished generating a TeMoto workspace '" << temoto_ws_name 
