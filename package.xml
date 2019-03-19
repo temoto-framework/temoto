@@ -4,9 +4,9 @@
   <version>0.0.0</version>
   <description>The temoto package</description>
 
-  <maintainer email="robert@todo.todo">robert</maintainer>
+  <maintainer email="robert.valner@ut.ee">Robert Valner</maintainer>
 
-  <license>TODO</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 
@@ -23,10 +23,4 @@
   <exec_depend>roslib</exec_depend>
   <exec_depend>file_template_parser</exec_depend>
 
-
-  <!-- The export tag contains other, unspecified, tags -->
-  <export>
-    <!-- Other tools can request additional information be placed here -->
-
-  </export>
 </package>
