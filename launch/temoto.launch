@@ -10,6 +10,7 @@
   <group ns="$(arg temoto_namespace)">
     <node name="temoto_er_manager" pkg="temoto_er_manager" type="temoto_er_manager" output="screen" />
     <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen" />
+    <node name="temoto_context_manager" pkg="temoto_context_manager" type="temoto_context_manager" output="screen" />
     <node name="temoto_nlp_interface" pkg="temoto_nlp" type="temoto_nlp_interface" args="$(arg action_paths)" output="screen" />
   </group>
 
