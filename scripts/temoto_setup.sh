@@ -50,21 +50,7 @@ find_install_from_apt () {
 }
 
 # Go back to the catkin_workspace/src folder
-P1=$(awk -F: '{print $1}' <<< "$ROS_PACKAGE_PATH")
-P2=$(awk -F: '{print $2}' <<< "$ROS_PACKAGE_PATH")
-CW_DIR="Uninitialized directory"
-
-# Find the catkin_workspace directory
-if [[ $P1 = *"opt"* ]]; then
-  CW_DIR=$P2
-else
-  CW_DIR=$P1
-fi
-
-if [[ -z $CW_DIR ]]; then
-  echo -e $RED$BOLD"Could not find the catkin workspace, have you sourced it? Exiting."$RESET
-  exit
-fi
+CW_DIR=$(pwd)
 
 # Check for sub-folder argument
 SUBFOLDER="" 
