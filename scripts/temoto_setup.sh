@@ -92,7 +92,7 @@ find_install_from_apt libtinyxml2.6.2v5
 echo -e $NL"TeMoto subsystems:"
 
 # Open the subsystems file
-TEMOTO_SUBSYS_FILE=$(rospack find temoto)/scripts/temoto_subsystems.txt
+TEMOTO_SUBSYS_FILE=$CW_DIR/$SUBFOLDER/temoto/scripts/temoto_subsystems.txt
 SUBSYSTEM_NAMES=$(cat  $TEMOTO_SUBSYS_FILE |tr "\n" " ")
 
 for subsys_name in $SUBSYSTEM_NAMES 
