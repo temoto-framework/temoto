@@ -135,7 +135,7 @@ cd $PREV_DIR
 
 if [[ $NEW_STUFF_INSTALLED == 1 ]]; then
   echo -e $NL"TeMoto packages are installed,$BOLD run catkin make."$RESET
-  echo -e $YELLOW"NB! If"$BOLD "temoto_nlp"$RESET$YELLOW "package was just installed, then make sure that you have run 'temoto_nlp/scripts/install_meta.sh' before running catkin_make"
+  echo -e $YELLOW"NB! If"$BOLD "temoto_nlp"$RESET$YELLOW "package was just installed, then make sure that you have run 'temoto_nlp/scripts/install_meta.sh' before running catkin_make" $RESET
 else
-  echo -e $NL"TeMoto packages are installed."
+  echo -e $NL"TeMoto packages are installed." $RESET
 fi
