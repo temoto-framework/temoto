@@ -7,9 +7,11 @@
 
 <![CDATA[<launch>
   <arg name="temoto_namespace" default="$(arg temoto_ws_name)"/>
+  <arg name="load_nl_terminal" default="true"/>
 
   <include file="$(find temoto)/launch/temoto.launch">
     <arg name="temoto_namespace" value="$(arg temoto_namespace)" />
+    <arg name="load_nl_terminal" value="$(arg load_nl_terminal)" />
     <arg name="action_paths" value="$(find $(arg temoto_ws_name))/config/action_dst.yaml" />
   </include>
 </launch>
