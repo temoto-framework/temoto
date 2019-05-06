@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="temoto_namespace" default="$(anon temoto)" />
+  <arg name="wake_groups" default=""/>
   <arg name="action_paths" default="$(find temoto_core)/config/action_dst.yaml" />
   <arg name="load_nl_terminal" default="true"/>
 
@@ -13,7 +14,8 @@
     <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen" />
     <node name="temoto_context_manager" pkg="temoto_context_manager" type="temoto_context_manager" output="screen" />
     <node name="temoto_output_manager" pkg="temoto_output_manager" type="temoto_output_manager" output="screen" />
-    <node name="temoto_nlp_interface" pkg="temoto_nlp" type="temoto_nlp_interface" args="$(arg action_paths) $(arg load_nl_terminal)" output="screen" />
+    <node name="temoto_nlp_interface" pkg="temoto_nlp" type="temoto_nlp_interface" 
+          args="-a $(arg action_paths) -l $(arg load_nl_terminal) -w $(arg wake_groups)" output="screen" />
   </group>
 
 </launch>
