@@ -15,7 +15,7 @@ int main(int argc, char **argv)
   // Get the name of the package
   const std::string temoto_ws_name = std::string(argv[1]);
   const std::string base_path = ros::package::getPath(ROS_PACKAGE_NAME);
-  const std::string temoto_ws_path = base_path + "/../../" + temoto_ws_name + "/";
+  const std::string temoto_ws_path = base_path + "/../" + temoto_ws_name + "/";
   const std::string temoto_ws_package_path = temoto_ws_path + temoto_ws_name + "/";
 
   /*

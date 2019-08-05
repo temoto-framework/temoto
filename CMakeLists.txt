@@ -27,5 +27,4 @@ add_dependencies(temoto_ws_generator
 )
 target_link_libraries(temoto_ws_generator
   ${catkin_LIBRARIES}
-  ft_parser
 )
