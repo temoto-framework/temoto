@@ -1,11 +1,3 @@
 temoto
-temoto_core
-temoto_er_manager
-temoto_nlp
+temoto_action_engine
 temoto_action_assistant
-temoto_component_manager
-temoto_context_manager
-temoto_output_manager
-temoto_robot_manager
-temoto_test_suite
-temoto_examples
