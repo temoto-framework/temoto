@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+
+<f_template extension=".conf">
+
+  <arg name="temoto_ws_name" default="temoto_ws_noname" />
+  <body>
+
+<![CDATA[]]>
+
+  </body>
+
+</f_template>

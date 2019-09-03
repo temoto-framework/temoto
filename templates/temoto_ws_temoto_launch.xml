@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<f_template extension=".launch">
+
+  <arg name="temoto_ws_name" default="temoto_ws_noname" />
+  <body>
+
+<![CDATA[<launch>
+  <arg name="temoto_namespace" default="$(arg temoto_ws_name)"/>
+  <arg name="additional_wake_words" default="everybody"/>
+  <arg name="action_packages_path" default="$(find $(arg temoto_ws_name))/config/action_dst.yaml" />
+  <arg name="default_umrf_path" default="$(find $(arg temoto_ws_name))/config/default_umrf.json"/>
+
+  <env name="ROSCONSOLE_FORMAT" value="[${function}] ${message}" />
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find $(arg temoto_ws_name))/config/console.conf" />  
+
+  <group ns="$(arg temoto_namespace)">
+    <node name="temoto_er_manager" pkg="temoto_er_manager" type="temoto_er_manager" output="screen" />
+    <node name="temoto_action_engine" pkg="temoto_action_engine" type="action_engine_node" 
+          args="--a $(arg action_packages_path) --d $(arg default_umrf_path) --mw $(arg temoto_namespace) --w $(arg additional_wake_words)" output="screen" />
+  </group>
+</launch>
+]]>
+
+  </body>
+
+</f_template>
