@@ -1,3 +1,5 @@
 temoto
+temoto_core
 temoto_action_engine
 temoto_action_assistant
+temoto_er_manager

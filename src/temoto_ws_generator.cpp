@@ -64,6 +64,7 @@ int main(int argc, char **argv)
 
   std::cout << "* Finished generating a TeMoto workspace '" << temoto_ws_name 
             << "' to " << temoto_ws_path << std::endl;
+  std::cout << "\nDon't forget to source catkin workspace" << std::endl;
 
   return 0;
 }
