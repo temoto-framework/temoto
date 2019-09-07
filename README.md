@@ -24,3 +24,4 @@ bash scripts/install_meta.sh
 # Compile your workspace
 cd <catkin_ws> && catkin_make
 ```
+.
