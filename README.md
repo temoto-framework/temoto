@@ -1,27 +1,17 @@
 # temoto
 Setup package for TeMoto
 
+**More information about Temoto in https://temoto-telerobotics.github.io**
+
 ## Installation Instructions
 
 ``` bash
-# Go to your catkin workspace source dir
-cd <catkin_ws>/src/
+# Navigate to your catkin workspace
+cd <catkin_workspace>/src
 
-# Create a subfolder for maintaining TeMoto things
-mkdir temoto && cd temoto
+# Clone TeMoto and all it's dependencies
+git clone --recursive https://github.com/temoto-telerobotics/temoto
 
-# Clone 'temoto'
-git clone <link-to-this-repo>
-
-# Run the TeMoto setup script & follow the instructions
-# the tailing 'temoto' parameter indicates the installation dir
-bash temoto/scripts/temoto_setup.sh temoto
-
-# Install MeTA
-cd temoto_nlp
-bash scripts/install_meta.sh
-
-# Compile your workspace
-cd <catkin_ws> && catkin_make
+# Build your workspace
+catkin build
 ```
-.
