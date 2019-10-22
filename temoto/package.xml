@@ -26,7 +26,6 @@
   <exec_depend>temoto_core</exec_depend>
   <exec_depend>temoto_workspace_generator</exec_depend>
   <exec_depend>temoto_action_assistant</exec_depend>
-  <exec_depend>temoto_utils</exec_depend>
   <exec_depend>temoto_action_engine</exec_depend>
   <exec_depend>temoto_er_manager</exec_depend>
   <exec_depend>temoto_component_manager</exec_depend>
