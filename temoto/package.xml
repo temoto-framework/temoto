@@ -10,18 +10,22 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>temoto_core</build_depend>
-  <build_depend>temoto_utils</build_depend>
+  <build_depend>temoto_workspace_generator</build_depend>
+  <build_depend>temoto_action_assistant</build_depend>
   <build_depend>temoto_action_engine</build_depend>
   <build_depend>temoto_er_manager</build_depend>
   <build_depend>temoto_component_manager</build_depend>
 
   <build_export_depend>temoto_core</build_export_depend>
-  <build_export_depend>temoto_utils</build_export_depend>
+  <build_export_depend>temoto_workspace_generator</build_export_depend>
+  <build_export_depend>temoto_action_assistant</build_export_depend>>
   <build_export_depend>temoto_action_engine</build_export_depend>
   <build_export_depend>temoto_er_manager</build_export_depend>
   <build_export_depend>temoto_component_manager</build_export_depend>
 
   <exec_depend>temoto_core</exec_depend>
+  <exec_depend>temoto_workspace_generator</exec_depend>
+  <exec_depend>temoto_action_assistant</exec_depend>
   <exec_depend>temoto_utils</exec_depend>
   <exec_depend>temoto_action_engine</exec_depend>
   <exec_depend>temoto_er_manager</exec_depend>

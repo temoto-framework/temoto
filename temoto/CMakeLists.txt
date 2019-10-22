@@ -4,12 +4,19 @@ add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   temoto_core
-  temoto_utils
+  temoto_workspace_generator
+  temoto_action_assistant
   temoto_action_engine
   temoto_er_manager
   temoto_component_manager
 )
 
 catkin_package(
- CATKIN_DEPENDS temoto_core temoto_utils temoto_action_engine temoto_er_manager temoto_component_manager
+  CATKIN_DEPENDS 
+    temoto_core
+    temoto_workspace_generator
+    temoto_action_assistant
+    temoto_action_engine
+    temoto_er_manager
+    temoto_component_manager
 )
