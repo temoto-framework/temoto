@@ -11,10 +11,13 @@ notifications:
     recipients:
       - valnerrobert@gmail.com
 env:
+   global: # global settings for all jobs
+    - ROS_REPO=ros
+    - CCACHE_DIR=$HOME/.ccache # enables C/C++ caching in industrial_ci
   matrix:
-    - ROS_DISTRO="kinetic" NOT_TEST_BUILD=true NOT_TEST_INSTALL=true
-    - ROS_DISTRO="melodic" NOT_TEST_BUILD=true NOT_TEST_INSTALL=true
+    - ROS_DISTRO="kinetic"
+    - ROS_DISTRO="melodic"
 install:
   - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci.git .industrial_ci -b master
 script:
-  - source .ci_config/travis.sh
+  - .ci_config/travis.sh
