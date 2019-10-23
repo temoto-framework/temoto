@@ -15,7 +15,7 @@ env:
     - ROS_REPO=ros
     - CCACHE_DIR=$HOME/.ccache # enables C/C++ caching in industrial_ci
     - CATKIN_CONFIG='--no-install'
-    - VERBOSE_OUTPUT=true
+    - WRITABLE_SOURCE=true
   matrix:
     - ROS_DISTRO="kinetic"
     - ROS_DISTRO="melodic"
