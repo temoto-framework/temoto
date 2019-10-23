@@ -15,6 +15,6 @@ env:
     - ROS_DISTRO="kinetic" NOT_TEST_BUILD=true NOT_TEST_INSTALL=true
     - ROS_DISTRO="melodic" NOT_TEST_BUILD=true NOT_TEST_INSTALL=true
 install:
-  - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
+  - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci.git .industrial_ci -b master
 script:
   - source .ci_config/travis.sh
