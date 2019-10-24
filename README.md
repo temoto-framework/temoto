@@ -1,6 +1,9 @@
 # temoto
 Setup package for TeMoto
 
+[![Build Status](https://travis-ci.org/temoto-telerobotics/temoto.svg?branch=master)](https://travis-ci.org/temoto-telerobotics/temoto)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 **More information about Temoto in https://temoto-telerobotics.github.io**
 
 ## Installation Instructions
