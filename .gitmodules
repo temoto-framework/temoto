@@ -13,3 +13,7 @@
 [submodule "temoto_core"]
 	path = temoto_core
 	url = https://github.com/temoto-telerobotics/temoto_core
+[submodule "temoto_resource_registrar"]
+	path = temoto_resource_registrar
+	url = https://github.com/temoto-telerobotics/temoto_resource_registrar
+	branch = messaging-devel
