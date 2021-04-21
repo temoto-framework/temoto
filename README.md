@@ -28,9 +28,9 @@ TeMoto provides a set of software tools that help solving common challenges in a
 TeMoto framework allows dynamic use of a system's hardware and software resources enabling Long-Term Autonomy (LTA), redundancy and energy efficiency. For example, a planetary rover equipped with a number of sensors and actuators could be deployed in a remote site with a variety of mission(s) that last for long periods of time. Unexpected sensor failures have to be resolved by substituting the failed resource with similar or combined resources. Also, the goals of the mission can change, which requires a modular way to separate mission control logic from the resource management, thus maximizing code reuse and therefore development efficiency. 
 
 As mentioned earlier, not every feature or tool of TeMoto is required for deployment. The developer can choose the tools that matter the most and discard the rest.
-<div style="text-align:center">
+<p align="center">
   <img src="docs/figures/enabling_features.png" alt="Enabling features" class="center" width="600"/>
-</div>
+</p>
 
 ## In-Depth Overview
 
@@ -44,9 +44,9 @@ The TeMoto framework stems from three distinct concepts:
     
 * **Resource Manager** - A subsystem responsible for serving *resource* requests. Different resources types can be handled by the same *resource manager*.
 
-<div style="text-align:center">
+<p align="center">
   <img src="docs/figures/architecture.png" alt="Architecture of TeMoto" class="center" width="500"/>
-</div>
+</p>
 
 ### TeMoto Resource Managers
 
@@ -58,9 +58,9 @@ The TeMoto framework stems from three distinct concepts:
     
 * **Output Manager** provides visualization for output data. Similar to the Component Manager, the Output Manager maintains descriptions about different types of output methods and how to access them. ROS RViz is used as the main platform for visualization. Each displayable data type that is supported by the Output Manager is displayed via dynamically loadable RViz plugins (regarded as a resource in the Output Manager).
 
-<div style="text-align:center">
-  <img src="docs/figures/resource_managers.png" alt="Resource Managers" class="center" width="500"/>
-</div>
+<p align="center">
+  <img src="docs/figures/resource_managers.png" alt="Resource Managers" class="center" width="600"/>
+</p>
 
 ## Installation Instructions
 
