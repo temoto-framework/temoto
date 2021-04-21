@@ -44,6 +44,8 @@ The TeMoto framework stems from three distinct concepts:
     
 * **Resource Manager** - A subsystem responsible for serving *resource* requests. Different resources types can be handled by the same *resource manager*.
 
+***These concepts, when combined, form the architecture of a TeMoto based software system. However, this architecture is purely conceptual is not enforced in implementation, thus keeping the use of individual tools within the layers flexible.*** 
+
 <p align="center">
   <img src="docs/figures/architecture.png" alt="Architecture of TeMoto" class="center" width="500"/>
 </p>
@@ -59,8 +61,15 @@ The TeMoto framework stems from three distinct concepts:
 * **Output Manager** provides visualization for output data. Similar to the Component Manager, the Output Manager maintains descriptions about different types of output methods and how to access them. ROS RViz is used as the main platform for visualization. Each displayable data type that is supported by the Output Manager is displayed via dynamically loadable RViz plugins (regarded as a resource in the Output Manager).
 
 <p align="center">
-  <img src="docs/figures/resource_managers.png" alt="Resource Managers" class="center" width="600"/>
+  <img src="docs/figures/resource_managers.png" alt="Resource Managers" class="center" width="550"/>
 </p>
+
+### TeMoto Actions
+
+**Actions** are code modules that embed developer-defined task logic. 
+* *Actions* accept and provide data, i.e., parameters, which makes an *action* reusable in different scenarios, e.g., a “navigation” *action *that accepts the destination coordinates as an input. 
+* An *action* is not a program executed as a standalone process by the OS. It is a plug-in dynamically loaded by a host program, making both able to share system memory for quick data exchange. The Action Engine is a host program that provides dynamic loading and execution of *actions*. 
+* Action Engine manages multiple *actions*, supporting sequential/concurrent execution and loops. Thus a range of tasks can be described and executed by combining primitive and reusable *actions*. For example, “picking up an object” task can be formed by “locate-object,” “navigate-to,” “move-manipulator-at,” and “grab” *actions* executed sequentially.
 
 ## Installation Instructions
 
@@ -76,3 +85,38 @@ catkin build
 ``` 
 
 ## Code Examples
+
+Here are few examples of how different tools of TeMoto framework can be embedded into your application. 
+
+### Using the External Resource Manager
+
+First, here's the whole C++ demo application (explanations will follow):
+
+``` c++
+#include "ros/ros.h"
+#include "temoto_er_manager/temoto_er_manager_interface.h"
+
+void resourceFailureCallback(temoto_er_manager::LoadExtResource load_resource_msg)
+{
+  ROS_WARN_STREAM("The following resource stopped unexpectedly\n" << load_resource_msg.request);
+}
+
+int main(int argc, char** argv)
+{
+  ros::init(argc, argv, "test_er_client_node");
+
+  temoto_er_manager::ERManagerInterface ermi(true);
+  ermi.registerUpdateCallback(resourceFailureCallback);
+
+  ROS_INFO("Loading gnome-calculator");
+  temoto_er_manager::LoadExtResource load_resource_msg = ermi.loadSysResource("gnome-calculator");
+  ros::Duration(5).sleep();
+
+  ROS_INFO("Unloading gnome-calculator");
+  ermi.unloadResource(load_resource_msg);
+
+  ROS_INFO("Loading rqt_graph");
+  ermi.loadRosResource("rqt_graph", "rqt_graph");
+  ros::Duration(5).sleep();
+}
+```
