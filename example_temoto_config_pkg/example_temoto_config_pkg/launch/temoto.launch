@@ -2,13 +2,15 @@
   <arg name="temoto_namespace" default="my_temoto"/>
   <arg name="extra_wake_words" default="everybody"/>
   <arg name="actions_path" default="$(find example_temoto_config_pkg)/../temoto_actions" />
+  <arg name="component_config_base_path" default="$(find example_temoto_config_pkg)/config" />
 
   <env name="ROSCONSOLE_FORMAT" value="[${function}] ${message}" />
-  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find temoto_ws)/config/console.conf" />  
+  <env name="ROSCONSOLE_CONFIG_FILE" value="$(find example_temoto_config_pkg)/config/console.conf" />  
 
   <group ns="$(arg temoto_namespace)">
     <node name="temoto_er_manager" pkg="temoto_er_manager" type="temoto_er_manager" output="screen" />
-    <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen" />
+    <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen" 
+          args="--config-base-path $(arg component_config_base_path)"/>
     <node name="temoto_action_engine" pkg="temoto_action_engine" type="action_engine_node" output="screen"
           args="--wake-word $(arg temoto_namespace) 
                 --actions-path $(arg actions_path) 

@@ -10,16 +10,16 @@ This repository is an entry-point to TeMoto framework.
 
 ---
 
-## Quick Overview
+# Quick Overview
 
-### What is TeMoto?
+## What is TeMoto?
 TeMoto is a ROS-based software framework for building dependable robotic applications for facilitating human-robot collaboration and autonomy.
 
 TeMoto provides a set of software tools that help solving common challenges in applications covering system reliability, human-robot collaboration and multi-robot systems.
 
 ***And just like any other toolbox, it's up to the user of the toolbox to decide what tool is right for the application.***
 
-### Key features of TeMoto
+## Key features of TeMoto
 
 * **Dynamic resource management**: Existing components, or resources such as a camera, lidar, CPU intensive algorithm, etc.  can be programmatically monitored, started and stopped.
     
@@ -29,7 +29,7 @@ TeMoto provides a set of software tools that help solving common challenges in a
     
 * **Full system modularity**: While TeMoto contains a number of subsystems (ROS nodes), each subsystem has minimal dependencies. This allows the robotics community to adopt only the tools that matter for their project and keeps code bloat at a minimum.
 
-### Use-case Example
+## Use-case Example
 TeMoto framework allows dynamic use of a system's hardware and software resources enabling Long-Term Autonomy (LTA), redundancy and energy efficiency. For example, a planetary rover equipped with a number of sensors and actuators could be deployed in a remote site with a variety of mission(s) that last for long periods of time. Unexpected sensor failures have to be resolved by substituting the failed resource with similar or combined resources. Also, the goals of the mission can change, which requires a modular way to separate mission control logic from the resource management, thus maximizing code reuse and therefore development efficiency. 
 
 As mentioned earlier, not every feature or tool of TeMoto is required for deployment. The developer can choose the tools that matter the most and discard the rest.
@@ -37,9 +37,9 @@ As mentioned earlier, not every feature or tool of TeMoto is required for deploy
   <img src="docs/figures/enabling_features.png" alt="Enabling features" class="center" width="600"/>
 </p>
 
-## In-Depth Overview
+# In-Depth Overview
 
-### Core Concepts and the Architecture
+## Core Concepts and the Architecture
 
 The TeMoto framework stems from three distinct concepts:
 
@@ -55,7 +55,7 @@ The TeMoto framework stems from three distinct concepts:
   <img src="docs/figures/architecture.png" alt="Architecture of TeMoto" class="center" width="500"/>
 </p>
 
-### TeMoto Resource Managers
+## TeMoto Resource Managers
 
 * **External Resource Manager** (ERM) allows to dynamically invoke programs (hereinafter External Resources or ERs), including ROS executables, ROS launch files and regular executables. Each requested program is a resource that ERM is managing.
     
@@ -69,14 +69,14 @@ The TeMoto framework stems from three distinct concepts:
   <img src="docs/figures/resource_managers.png" alt="Resource Managers" class="center" width="550"/>
 </p>
 
-### TeMoto Actions
+## TeMoto Actions
 
 **Actions** are code modules that embed developer-defined task logic. 
 * *Actions* accept and provide data, i.e., parameters, which makes an *action* reusable in different scenarios, e.g., a “navigation” *action *that accepts the destination coordinates as an input. 
 * An *action* is not a program executed as a standalone process by the OS. It is a plug-in dynamically loaded by a host program, making both able to share system memory for quick data exchange. The Action Engine is a host program that provides dynamic loading and execution of *actions*. 
 * Action Engine manages multiple *actions*, supporting sequential/concurrent execution and loops. Thus a range of tasks can be described and executed by combining primitive and reusable *actions*. For example, “picking up an object” task can be formed by “locate-object,” “navigate-to,” “move-manipulator-at,” and “grab” *actions* executed sequentially.
 
-## Installation Instructions
+# Installation Instructions
 
 ``` bash
 # Navigate to your catkin workspace
@@ -87,15 +87,19 @@ git clone --recursive https://github.com/temoto-telerobotics/temoto
 
 # Build your workspace
 catkin build
+
+# Create a folder for temporary TeMoto configuration files in your home folder
+cd ~
+mkdir .temoto
 ``` 
 
-## Code Examples
+# Code Examples
 
 Here are few examples of how different tools of TeMoto framework can be embedded into your application. 
 
-### Using the External Resource Manager
+## Using the External Resource Manager
 
-This is a simple demonstration of ERM from client's perspective. ERM is used to load a ROS related program (rqt_graph) and also regular Ubuntu program (Gnome calcultator).  First, here's the whole C++ demo application (explanations will follow):
+This is a simple demonstration of ERM from client's perspective. ERM is used to load a ROS related program (rqt_graph) and also regular Ubuntu program (Gnome calcultator). First, here's the whole C++ demo application (explanations will follow):
 
 ``` c++
 #include "ros/ros.h"
@@ -125,7 +129,19 @@ int main(int argc, char** argv)
   ros::Duration(5).sleep();
 }
 ```
+### Run the Example
 
+Open up a terminal and run:
+``` bash
+roslaunch example_temoto_config_pkg temoto.launch
+```
+
+Open up another terminal and run:
+``` bash
+rosrun example_temoto_config_pkg er_manager_client __ns:=my_temoto
+```
+
+### Code Explained
 >
 >``` c++
 >temoto_er_manager::ERManagerInterface ermi(true);

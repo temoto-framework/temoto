@@ -3,7 +3,7 @@
   <arg name="camera_data_compressed" default="usb_cam/image_raw/compressed" />
   <arg name="camera_info" default="usb_cam/camera_info" /> 
   <arg name="video_device" default="/dev/video0" />
-  <arg name="camera_info_url" default="$(find temoto_ws)/config/camera_calibration_params.yaml" />
+  <arg name="camera_info_url" default="$(find example_temoto_config_pkg)/config/camera_calibration_params.yaml" />
   <arg name="frame_id" default="usb_cam" />
 
   <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" required="true" >

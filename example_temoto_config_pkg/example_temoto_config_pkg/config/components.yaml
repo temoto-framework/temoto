@@ -1,7 +1,7 @@
 Components:
 - component_name: "Any camera on video_device"
   component_type: "2d_camera"
-  package_name: "temoto_ws"
+  package_name: "example_temoto_config_pkg"
   executable:  "usb_cam_remappable.launch"
   output_topics:
     camera_data: "usb_cam/image_raw"

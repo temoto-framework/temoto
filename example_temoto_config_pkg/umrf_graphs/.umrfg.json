@@ -1,0 +1,39 @@
+{
+    "graph_name": "",
+    "graph_description": "",
+    "graph_state": 1,
+    "umrf_actions": [
+        {
+            "name": "TaDummyNavigation",
+            "package_name": "ta_dummy_navigation",
+            "id": 0,
+            "effect": "synchronous",
+            "input_parameters": {
+                "position": {
+                    "x": {
+                        "pvf_type": "number"
+                    },
+                    "y": {
+                        "pvf_type": "number"
+                    },
+                    "z": {
+                        "pvf_type": "number"
+                    }
+                }
+            },
+            "output_parameters": {
+                "position": {
+                    "x": {
+                        "pvf_type": "number"
+                    },
+                    "y": {
+                        "pvf_type": "number"
+                    },
+                    "z": {
+                        "pvf_type": "number"
+                    }
+                }
+            }
+        }
+    ]
+}

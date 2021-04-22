@@ -1,0 +1,31 @@
+{
+    "name": "TaDummyNavigation",
+    "package_name": "ta_dummy_navigation",
+    "effect": "synchronous",
+    "input_parameters": {
+        "position": {
+            "x": {
+                "pvf_type": "number"
+            },
+            "y": {
+                "pvf_type": "number"
+            },
+            "z": {
+                "pvf_type": "number"
+            }
+        }
+    },
+    "output_parameters": {
+        "position": {
+            "x": {
+                "pvf_type": "number"
+            },
+            "y": {
+                "pvf_type": "number"
+            },
+            "z": {
+                "pvf_type": "number"
+            }
+        }
+    }
+}
