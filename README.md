@@ -6,8 +6,6 @@ This repository is an entry-point to TeMoto framework.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**More information about Temoto in https://temoto-telerobotics.github.io**
-
 ---
 
 # Quick Overview
