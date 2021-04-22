@@ -1,9 +1,14 @@
-# temoto
-Setup package for TeMoto
+<p align="left">
+  <img src="docs/figures/temoto_logo_embedded_onb.png" alt="Enabling features" class="center" width="200"/>
+</p>
+
+This repository is an entry-point to TeMoto framework. 
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 **More information about Temoto in https://temoto-telerobotics.github.io**
+
+---
 
 ## Quick Overview
 
@@ -16,7 +21,7 @@ TeMoto provides a set of software tools that help solving common challenges in a
 
 ### Key features of TeMoto
 
-* **Dynamic resource management**: Existing components, or resources such as a camera, lidar, network, CPU intensive algorithm, etc.  can be programmatically monitored, started, stopped, and shared.
+* **Dynamic resource management**: Existing components, or resources such as a camera, lidar, CPU intensive algorithm, etc.  can be programmatically monitored, started and stopped.
     
 * **Task management**: TeMoto separates mission strategy related code from functional resources, such as sensors and actuators. A task consists of modular actions that implement a specific behaviour, e.g., a sensing or a navigation action. Actions can contain any arbitrary user defined code and can dynamically start, stop and access resources. 
     
@@ -44,7 +49,7 @@ The TeMoto framework stems from three distinct concepts:
     
 * **Resource Manager** - A subsystem responsible for serving *resource* requests. Different resources types can be handled by the same *resource manager*.
 
-***These concepts, when combined, form the architecture of a TeMoto based software system. However, this architecture is purely conceptual is not enforced in implementation, thus keeping the use of individual tools within the layers flexible.*** 
+***These concepts, when combined, form the architecture of a TeMoto-based software system. However, this architecture is purely conceptual is not enforced in implementation, thus keeping the use of individual tools within the layers flexible.*** 
 
 <p align="center">
   <img src="docs/figures/architecture.png" alt="Architecture of TeMoto" class="center" width="500"/>
@@ -90,7 +95,7 @@ Here are few examples of how different tools of TeMoto framework can be embedded
 
 ### Using the External Resource Manager
 
-First, here's the whole C++ demo application (explanations will follow):
+This is a simple demonstration of ERM from client's perspective. ERM is used to load a ROS related program (rqt_graph) and also regular Ubuntu program (Gnome calcultator).  First, here's the whole C++ demo application (explanations will follow):
 
 ``` c++
 #include "ros/ros.h"
@@ -120,3 +125,16 @@ int main(int argc, char** argv)
   ros::Duration(5).sleep();
 }
 ```
+
+>
+>``` c++
+>temoto_er_manager::ERManagerInterface ermi(true);
+>```
+>Create External Resource Manager Interface object that provides a simplified API for communicating with the External Resource Manager. The boolean "true", that's passed to the constructor of ERM interface tells it whether it should be initialised immediately, or that's done later by the user.
+
+<br/>
+
+>``` c++
+>ermi.registerUpdateCallback(resourceFailureCallback);
+>```
+>You can register a custom routine (not required) where resource failures are reported.
