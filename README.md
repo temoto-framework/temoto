@@ -138,3 +138,27 @@ int main(int argc, char** argv)
 >ermi.registerUpdateCallback(resourceFailureCallback);
 >```
 >You can register a custom routine (not required) where resource failures are reported.
+
+<br/>
+
+>``` c++
+>temoto_er_manager::LoadExtResource load_resource_msg = ermi.loadSysResource("gnome-calculator");
+>
+>ros::Duration(5).sleep();
+>
+>ermi.unloadResource(load_resource_msg);
+>```
+>Load the Gnome calculator as an example of a regular system program. Additional arguments can also be passed as a second `std::string` variable.
+>
+>ER Manager allows to invoke ROS executables, ROS launch files and other programs. The `loadRosResource` and `loadSysResource` methods return a `temoto_er_manager::LoadExtResource` object which contains the details regarding the query. This can be later used to unload the resource.
+
+<br/>
+
+>``` c++
+>ermi.loadRosResource("rqt_graph", "rqt_graph");
+>```
+>Load a ROS program an example of a ROS executable (regularly invoked via `rosrun`). The first parameter indicates the ROS package name and the second indicates the executable. Additional arguments can also be passed as a third `std::string` variable. The same method can be used to load ROS launch files.
+>
+>Note that this time the `unloadResource` was not invoked, as the destructor of `ermi` object automatically unloads all loaded resources.
+
+<br/>
