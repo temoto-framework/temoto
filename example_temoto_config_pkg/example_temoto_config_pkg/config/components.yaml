@@ -13,7 +13,7 @@ Components:
 
 - component_name: "String spammer 0"
   component_type: "cs_test_0"
-  package_name: "temoto_test_suite"
+  package_name: "example_temoto_config_pkg"
   executable:  "component_string_0"
   output_topics:
     data_type_0: "cs_0_pub_0"
@@ -21,7 +21,7 @@ Components:
 
 - component_name: "String spammer 1"
   component_type: "cs_test_1"
-  package_name: "temoto_test_suite"
+  package_name: "example_temoto_config_pkg"
   executable:  "component_string_1"
   input_topics:
     data_type_0: "cs_1_sub_0"
@@ -32,7 +32,7 @@ Components:
 
 - component_name: "String spammer 2"
   component_type: "cs_test_2"
-  package_name: "temoto_test_suite"
+  package_name: "example_temoto_config_pkg"
   executable:  "component_string_2"
   input_topics:
     data_type_2: "cs_2_sub_0"
