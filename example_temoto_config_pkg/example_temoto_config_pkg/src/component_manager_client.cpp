@@ -26,14 +26,14 @@ int main(int argc, char** argv)
    */
   cmi.registerComponentStatusCallback(resourceFailureCallback);
 
-  // ROS_INFO("Loading 2d_camera");
-  // auto responded_topics = cmi.startComponent("2d_camera");
-  // ros::Duration(15).sleep();
+  ROS_INFO("Loading 2d_camera");
+  auto responded_topics = cmi.startComponent("2d_camera");
+  ros::Duration(15).sleep();
 
-  // ROS_INFO("Unloading 2d_camera");
-  // cmi.stopComponent("2d_camera", "", "");
+  ROS_INFO("Unloading 2d_camera");
+  cmi.stopComponent("2d_camera", "", "");
 
   ROS_INFO("Loading testpipe");
-  temoto_core::TopicContainer load_pipe_msg = cmi.startPipe("testpipe");
+  //temoto_core::TopicContainer load_pipe_msg = cmi.startPipe("testpipe");
   ros::Duration(15).sleep();
 }

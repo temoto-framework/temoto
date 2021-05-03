@@ -8,8 +8,8 @@
   <env name="ROSCONSOLE_CONFIG_FILE" value="$(find example_temoto_config_pkg)/config/console.conf" />   -->
 
   <group ns="$(arg temoto_namespace)">
-    <node name="temoto_er_manager" pkg="temoto_er_manager" type="temoto_er_manager" output="screen" />
-    <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen"
+    <node name="temoto_er_manager" pkg="temoto_er_manager" type="temoto_er_manager" output="screen" respawn="true"/>
+    <node name="temoto_component_manager" pkg="temoto_component_manager" type="temoto_component_manager" output="screen" respawn="true"
           args="--config-base-path $(arg component_config_base_path)"/>
     <node name="temoto_action_engine" pkg="temoto_action_engine" type="action_engine_node" output="screen"
           args="--wake-word $(arg temoto_namespace) 
