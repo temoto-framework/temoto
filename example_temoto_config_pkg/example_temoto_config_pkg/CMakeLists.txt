@@ -4,6 +4,11 @@ project(example_temoto_config_pkg)
 # use c++11 standard
 add_compile_options(-std=c++14)
 
+option(TEMOTO_ENABLE_TRACING_ "Use tracer" OFF)
+if(TEMOTO_ENABLE_TRACING_)
+  add_compile_options(-Dtemoto_enable_tracing)
+endif()
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy

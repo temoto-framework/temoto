@@ -8,7 +8,8 @@ void resourceFailureCallback(temoto_component_manager::LoadComponent load_resour
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "test_cm_client_node");
+  TEMOTO_LOG_ATTR.initialize("test_cm_client_node");
+  ros::init(argc, argv, TEMOTO_LOG_ATTR.getSubsystemName());
   ros::AsyncSpinner spinner(4); // Use 4 threads
   spinner.start();
   //ros::waitForShutdown();
@@ -28,12 +29,12 @@ int main(int argc, char** argv)
 
   ROS_INFO("Loading 2d_camera");
   auto responded_topics = cmi.startComponent("2d_camera");
-  ros::Duration(15).sleep();
+  ros::Duration(10).sleep();
 
   ROS_INFO("Unloading 2d_camera");
   cmi.stopComponent("2d_camera", "", "");
 
-  ROS_INFO("Loading testpipe");
-  //temoto_core::TopicContainer load_pipe_msg = cmi.startPipe("testpipe");
-  ros::Duration(15).sleep();
+  // ROS_INFO("Loading testpipe");
+  // //temoto_core::TopicContainer load_pipe_msg = cmi.startPipe("testpipe");
+  // ros::Duration(15).sleep();
 }
