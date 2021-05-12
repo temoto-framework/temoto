@@ -11,6 +11,13 @@ Components:
     frame_id: "camera_link"
     video_device: "/dev/video0"
 
+- component_name: "Connects gazebo lidar topic to localization"
+  component_type: "2d_lidar"
+  package_name: "topic_tools"
+  executable:  "relay"
+  output_topics:
+    lidar_data: "remapped_scan"
+
 - component_name: "String spammer 0"
   component_type: "cs_test_0"
   package_name: "example_temoto_config_pkg"

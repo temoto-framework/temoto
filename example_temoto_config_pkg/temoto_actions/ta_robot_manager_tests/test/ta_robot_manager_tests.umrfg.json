@@ -1,5 +1,5 @@
 {
-    "graph_name": "",
+    "graph_name": "ta_robot_manager_tests",
     "graph_description": "",
     "graph_state": 1,
     "umrf_actions": [
@@ -7,7 +7,7 @@
             "name": "TaRobotManagerTests",
             "package_name": "ta_robot_manager_tests",
             "id": 0,
-            "effect": "asynchronous"
+            "effect": "synchronous"
         }
     ]
 }

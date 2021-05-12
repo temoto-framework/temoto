@@ -17,3 +17,7 @@
 	path = temoto_resource_registrar
 	url = https://github.com/temoto-telerobotics/temoto_resource_registrar
 	branch = messaging-devel
+[submodule "temoto_robot_manager"]
+	path = temoto_robot_manager
+	url = https://github.com/temoto-telerobotics/temoto_robot_manager
+	branch = rr-devel

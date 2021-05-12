@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 
   ROS_INFO("Loading 2d_camera");
   auto responded_topics = cmi.startComponent("2d_camera");
-  ros::Duration(10).sleep();
+  ros::Duration(15).sleep();
 
   ROS_INFO("Unloading 2d_camera");
   cmi.stopComponent("2d_camera", "", "");

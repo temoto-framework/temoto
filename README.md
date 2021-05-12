@@ -77,6 +77,9 @@ The TeMoto framework stems from three distinct concepts:
 # Installation Instructions
 
 ``` bash
+#install dependencies
+sudo apt install ros-noetic-moveit-ros-planning-interface
+
 # Navigate to your catkin workspace
 cd <catkin_workspace>/src
 
