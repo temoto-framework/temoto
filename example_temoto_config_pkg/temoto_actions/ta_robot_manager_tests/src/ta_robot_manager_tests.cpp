@@ -78,9 +78,25 @@ void executeTemotoAction()
   target_pose.pose.position.y = 4;
   target_pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, 0);;
 
-  TEMOTO_INFO_STREAM("Sending a navigation goal to " << robot_name << " ...");
-  rmi_.navigationGoal(robot_name, "map", target_pose);
-  TEMOTO_INFO_STREAM("Done navigating");
+  bool goal_reached = false;
+  while (!goal_reached)
+  try
+  {
+    TEMOTO_INFO_STREAM("Sending a navigation goal to " << robot_name << " ...");
+    if (rmi_.navigationGoal(robot_name, "map", target_pose))
+    {
+      TEMOTO_INFO_STREAM("Done navigating");
+      goal_reached = true;
+    }
+    else
+    {
+      TEMOTO_INFO_STREAM("The goal was not reached, requesting the same navigation goal again ... ");
+    }
+  }
+  catch(const resource_registrar::TemotoErrorStack &e)
+  {
+    TEMOTO_WARN_STREAM("Caught an error, requesting the same navigation goal again ... ");
+  }
 }
 
 // Destructor

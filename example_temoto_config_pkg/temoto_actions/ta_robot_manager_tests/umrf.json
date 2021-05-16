@@ -1,5 +1,5 @@
 {
     "name": "TaRobotManagerTests",
     "package_name": "ta_robot_manager_tests",
-    "effect": "synchronous"
+    "effect": "asynchronous"
 }

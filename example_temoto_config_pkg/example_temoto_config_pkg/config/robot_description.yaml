@@ -12,6 +12,7 @@ Robots:
       global_planner: "navfn/NavfnROS"
       local_planner: "base_local_planner/TrajectoryPlannerROS"
       scan_topic: "remapped_scan"
+      pose_topic: "amcl_pose"
       args: "scan_topic:=remapped_scan"
     driver:
       package_name: "jackal_gazebo" 
