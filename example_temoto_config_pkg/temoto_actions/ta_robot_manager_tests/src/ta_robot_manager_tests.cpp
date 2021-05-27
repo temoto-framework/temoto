@@ -42,6 +42,10 @@ void executeTemotoAction()
 {
   rmi_.initialize(*this);
   cmi_.initialize(*this);
+  cmi_.registerComponentStatusCallback(std::bind(&TaRobotManagerTests::componentStatusCallback
+  , this
+  , std::placeholders::_1
+  , std::placeholders::_2));
 
   std::string robot_name = "jackal_sim";
 
@@ -65,10 +69,9 @@ void executeTemotoAction()
   /*
    * Load the 2D lidar for the robot
    */
-  temoto_component_manager::LoadComponent load_component_query;
-  load_component_query.request.component_type = "2d_lidar";
-  load_component_query.request.additional_args = robot_scan_topic_from + " " + robot_scan_topic_to;
-  cmi_.startComponent(load_component_query);
+  load_component_query_.request.component_type = "2d_lidar";
+  load_component_query_.request.additional_args = robot_scan_topic_from + " " + robot_scan_topic_to;
+  cmi_.startComponent(load_component_query_);
 
   /*
    * Move the robot
@@ -105,10 +108,19 @@ void executeTemotoAction()
   TEMOTO_INFO("Action instance destructed");
 }
 
+void componentStatusCallback(temoto_component_manager::LoadComponent query_msg
+, temoto_resource_registrar::Status status_msg)
+{
+  // cmi_.stopComponent(load_component_query_);
+  // ros::Duration(3).sleep();
+  // cmi_.startComponent(load_component_query_);
+}
+
 private:
 
 temoto_robot_manager::RobotManagerInterface rmi_;
 temoto_component_manager::ComponentManagerInterface cmi_;
+temoto_component_manager::LoadComponent load_component_query_;
 
 }; // TaRobotManagerTests class
 

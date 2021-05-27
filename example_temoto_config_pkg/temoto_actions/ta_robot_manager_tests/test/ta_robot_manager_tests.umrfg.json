@@ -7,7 +7,7 @@
             "name": "TaRobotManagerTests",
             "package_name": "ta_robot_manager_tests",
             "id": 0,
-            "effect": "asynchronous"
+            "effect": "synchronous"
         }
     ]
 }
