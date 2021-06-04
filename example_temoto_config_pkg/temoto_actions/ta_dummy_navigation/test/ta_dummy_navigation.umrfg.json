@@ -9,7 +9,7 @@
             "id": 0,
             "effect": "synchronous",
             "input_parameters": {
-                "position": {
+                "current_location": {
                     "x": {
                         "pvf_type": "number",
                         "pvf_value": 0.0
@@ -18,21 +18,35 @@
                         "pvf_type": "number",
                         "pvf_value": 0.0
                     },
-                    "z": {
+                    "yaw": {
                         "pvf_type": "number",
                         "pvf_value": 0.0
+                    }
+                },
+                "nav_goal": {
+                    "x": {
+                        "pvf_type": "number",
+                        "pvf_value": 5.0
+                    },
+                    "y": {
+                        "pvf_type": "number",
+                        "pvf_value": -3.0
+                    },
+                    "yaw": {
+                        "pvf_type": "number",
+                        "pvf_value": 3.14
                     }
                 }
             },
             "output_parameters": {
-                "position": {
+                "current_location": {
                     "x": {
                         "pvf_type": "number"
                     },
                     "y": {
                         "pvf_type": "number"
                     },
-                    "z": {
+                    "yaw": {
                         "pvf_type": "number"
                     }
                 }

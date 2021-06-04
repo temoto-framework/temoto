@@ -1,29 +1,41 @@
 {
     "name": "TaDummyNavigation",
     "package_name": "ta_dummy_navigation",
+    "description": "Simulates a robot following a navigation goal. This action is useful just for demonstrative purposes",
     "effect": "synchronous",
     "input_parameters": {
-        "position": {
+        "current_location": {
             "x": {
                 "pvf_type": "number"
             },
             "y": {
                 "pvf_type": "number"
             },
-            "z": {
+            "yaw": {
+                "pvf_type": "number"
+            }
+        },
+        "nav_goal": {
+            "x": {
+                "pvf_type": "number"
+            },
+            "y": {
+                "pvf_type": "number"
+            },
+            "yaw": {
                 "pvf_type": "number"
             }
         }
     },
     "output_parameters": {
-        "position": {
+        "current_location": {
             "x": {
                 "pvf_type": "number"
             },
             "y": {
                 "pvf_type": "number"
             },
-            "z": {
+            "yaw": {
                 "pvf_type": "number"
             }
         }
