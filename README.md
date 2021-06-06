@@ -264,13 +264,13 @@ When you invoked the `invoke_action.launch`, all it did was that it read in the 
 
 ```
 
-Now the neat thing we can do with it, is that we can design more complex behaviors out of a single reusable action. For example the same action can be used sequentally or in a cycle, where one instance of the navigation action passes the `current_location` to another instance:
+The neat thing we can do with it, is that we can design more complex behaviors out of a single reusable action. For example the same action can be used sequentally or in a cycle, where one instance of the navigation action passes the `current_location` to another instance:
 
 <p align="center">
   <img src="docs/figures/umrf_graphs_dummy_nav.png" alt="Resource Managers" class="center" width="680"/>
 </p>
 
-Now you can achieve such behaviours by writing 3 different programs, **but the benefit of this approach is that the system is now reconfigurable on-the-fly either by the user, a task planning system, or any other system that outputs UMRF graphs**. You can try either configuration (while having the `temoto.launch` running in another terminal) out by:
+You can achieve such behaviours by writing 3 different programs, ***but the benefit of this approach is that the system is now reconfigurable on-the-fly either by the user, a task planning system, or any other system that outputs UMRF graphs***. You can try either configuration (while having the `temoto.launch` running in another terminal) out by:
 
 ``` bash
 roscd example_temoto_config_pkg
