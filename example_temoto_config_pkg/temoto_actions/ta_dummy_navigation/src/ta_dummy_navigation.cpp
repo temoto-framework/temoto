@@ -55,7 +55,7 @@ void executeTemotoAction()
   /*
    * Move the robot
    */
-  TEMOTO_INFO("Moving the dummy robot to [%.2f m; %.2f m] ...", in_param_nav_goal_x, in_param_nav_goal_y);
+  TEMOTO_INFO("\nMoving the dummy robot to [%.2f m; %.2f m] ...", in_param_nav_goal_x, in_param_nav_goal_y);
   double time_dist = distance_total / max_speed_linear_;
   if (time_dist > min_feedback_timestep_)
   {
@@ -143,8 +143,8 @@ double out_param_current_location_y;
 double out_param_current_location_yaw;
 
 // Declaration of intrinsic parameters of the dummy robot
-double max_speed_linear_ = 0.7;     // m/s
-double max_speed_angular_ = 0.8;    // rad/s
+double max_speed_linear_ = 0.7;      // m/s
+double max_speed_angular_ = 0.8;     // rad/s
 double min_feedback_timestep_ = 0.2; // s
 
 

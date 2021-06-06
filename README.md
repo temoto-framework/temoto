@@ -179,3 +179,113 @@ rosrun example_temoto_config_pkg er_manager_client __ns:=my_temoto
 >Note that this time the `unloadResource` was not invoked, as the destructor of `ermi` object automatically unloads all loaded resources.
 
 <br/>
+
+## Demonstration of TeMoto Actions
+
+This is a demonstration of what a TeMoto action looks like and how it can be used to design complex behaviors. In this example, let's consider an overly simplified case of autonomous navigation, where a simulated robot is driving across 2D plane that has no obstacles. We have a TeMoto action that:
+
+* Accepts the coordinates of robot's current location
+* Accepts the coordinates of the goal location
+* Outputs the coordinates of robot's final location
+
+And that's all there is to our simplistic simulation - The action essentially prints out numbers from `current location` to `goal location`, effectively simulating the navigation progress. You can find the implemetation of this action [here](https://github.com/temoto-telerobotics/temoto/blob/devel/example_temoto_config_pkg/temoto_actions/ta_dummy_navigation/src/ta_dummy_navigation.cpp), where most of it is just the math regarding the navigation progress simulation.
+
+### Run the Example
+
+Open up a terminal and run:
+``` bash
+export TEMOTO_NAMESPACE=temoto_test
+roslaunch example_temoto_config_pkg temoto.launch temoto_namespace:=$TEMOTO_NAMESPACE
+```
+
+Open up another terminal and run:
+``` bash
+roslaunch ta_dummy_navigation invoke_action.launch wake_word:=temoto_test
+```
+
+What you should see in the terminal is that some numbers progress from `current_loctaion` to `goal_location` until the goal is reached.
+
+### Code/Example Explained
+
+When you invoked the `invoke_action.launch`, all it did was that it read in the [description of the action](https://github.com/temoto-telerobotics/temoto/blob/devel/example_temoto_config_pkg/temoto_actions/ta_dummy_navigation/test/ta_dummy_navigation.umrfg.json) (UMRF graph) and sent it away as a [ROS message](https://github.com/temoto-telerobotics/temoto_action_engine/blob/ros1-devel/msg/UmrfGraphRos1.msg). The action engine received the message and looked up the appropriate TeMoto action that fits this description. Here's that UMRF graph, where all the location coordinates are embedded:
+
+``` json
+"graph_name": "ta_dummy_navigation",
+"umrf_actions": [
+    {
+        "name": "TaDummyNavigation",
+        "package_name": "ta_dummy_navigation",
+        "id": 0,
+        "effect": "synchronous",
+        "input_parameters": {
+            "current_location": {
+                "x": {
+                    "pvf_type": "number",
+                    "pvf_value": 0.0
+                },
+                "y": {
+                    "pvf_type": "number",
+                    "pvf_value": 0.0
+                },
+                "yaw": {
+                    "pvf_type": "number",
+                    "pvf_value": 0.0
+                }
+            },
+            "nav_goal": {
+                "x": {
+                    "pvf_type": "number",
+                    "pvf_value": 5.0
+                },
+                "y": {
+                    "pvf_type": "number",
+                    "pvf_value": -3.0
+                },
+                "yaw": {
+                    "pvf_type": "number",
+                    "pvf_value": 0.0
+                }
+            }
+        },
+        "output_parameters": {
+            "current_location": {
+                "x": {
+                    "pvf_type": "number"
+                },
+                "y": {
+                    "pvf_type": "number"
+                },
+                "yaw": {
+                    "pvf_type": "number"
+                }
+            }
+        }
+}]
+
+```
+
+Now the neat thing we can do with it, is that we can design more complex behaviors out of a single reusable action. For example the same action can be used sequentally or in a cycle, where one instance of the navigation action passes the `current_location` to another instance:
+
+<p align="center">
+  <img src="docs/figures/umrf_graphs_dummy_nav.png" alt="Resource Managers" class="center" width="680"/>
+</p>
+
+Now you can achieve such behaviours by writing 3 different programs, **but the benefit of this approach is that the system is now reconfigurable on-the-fly either by the user, a task planning system, or any other system that outputs UMRF graphs**. You can try either configuration (while having the `temoto.launch` running in another terminal) out by:
+
+``` bash
+roscd example_temoto_config_pkg
+rosrun temoto_action_engine parser_node ../umrf_graphs/dummy_nav_sequence.umrfg.json temoto_test
+```
+or
+
+``` bash
+roscd example_temoto_config_pkg
+rosrun temoto_action_engine parser_node ../umrf_graphs/dummy_nav_cycle.umrfg.json temoto_test
+```
+While the graph with sequential configuration terminates on its own, the cyclical one doesn't stop until it's told to, which you can do by: 
+
+``` bash
+rostopic pub /stop_umrf_graph_topic temoto_action_engine/StopUmrfGraph "graph_name: 'dummy_nav_cycle'
+targets:
+- 'temoto_test'" 
+```

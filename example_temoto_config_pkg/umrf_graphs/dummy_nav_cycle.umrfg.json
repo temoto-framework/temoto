@@ -1,14 +1,15 @@
 {
-    "graph_name": "dummy_nav_ex1",
-    "graph_description": "Navigation commands in a sequence",
-    "graph_state": 1,
+    "graph_name": "dummy_nav_cycle",
+    "graph_description": "",
+    "graph_state": 0,
     "umrf_actions": [
         {
             "name": "TaDummyNavigation",
             "package_name": "ta_dummy_navigation",
-            "description": "dummy_navigation_example_1",
+            "description": "Navigation commands in a cycle",
             "id": 0,
             "effect": "synchronous",
+            "execute_first": true,
             "input_parameters": {
                 "current_location": {
                     "x": {
@@ -57,12 +58,19 @@
                     "name": "TaDummyNavigation",
                     "id": 1
                 }
+            ],
+            "parents": [
+                {
+                    "name": "TaDummyNavigation",
+                    "id": 2,
+                    "required": false
+                }
             ]
         },
         {
             "name": "TaDummyNavigation",
             "package_name": "ta_dummy_navigation",
-            "description": "dummy_navigation_example_1",
+            "description": "Navigation commands in a cycle",
             "id": 1,
             "effect": "synchronous",
             "input_parameters": {
@@ -122,7 +130,7 @@
         {
             "name": "TaDummyNavigation",
             "package_name": "ta_dummy_navigation",
-            "description": "dummy_navigation_example_1",
+            "description": "Navigation commands in a cycle",
             "id": 2,
             "effect": "synchronous",
             "input_parameters": {
@@ -165,6 +173,12 @@
                     }
                 }
             },
+            "children": [
+                {
+                    "name": "TaDummyNavigation",
+                    "id": 0
+                }
+            ],
             "parents": [
                 {
                     "name": "TaDummyNavigation",
