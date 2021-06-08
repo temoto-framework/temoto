@@ -196,13 +196,13 @@ And that's all there is to our simplistic simulation - The action essentially pr
 
 Open up a terminal and run:
 ``` bash
-export TEMOTO_NAMESPACE=temoto_test
+export TEMOTO_NAMESPACE=my_temoto
 roslaunch example_temoto_config_pkg temoto.launch temoto_namespace:=$TEMOTO_NAMESPACE
 ```
 
 Open up another terminal and run:
 ``` bash
-roslaunch ta_dummy_navigation invoke_action.launch wake_word:=temoto_test
+roslaunch ta_dummy_navigation invoke_action.launch wake_word:=my_temoto
 ```
 
 What you should see in the terminal is that some numbers progress from `current_loctaion` to `goal_location` until the goal is reached.
@@ -276,18 +276,18 @@ You can achieve such behaviours by writing 3 different programs, ***but the bene
 
 ``` bash
 roscd example_temoto_config_pkg
-rosrun temoto_action_engine parser_node ../umrf_graphs/dummy_nav_sequence.umrfg.json temoto_test
+rosrun temoto_action_engine parser_node ../umrf_graphs/dummy_nav_sequence.umrfg.json my_temoto
 ```
 or
 
 ``` bash
 roscd example_temoto_config_pkg
-rosrun temoto_action_engine parser_node ../umrf_graphs/dummy_nav_cycle.umrfg.json temoto_test
+rosrun temoto_action_engine parser_node ../umrf_graphs/dummy_nav_cycle.umrfg.json my_temoto
 ```
 While the graph with sequential configuration terminates on its own, the cyclical one doesn't stop until it's told to, which you can do by: 
 
 ``` bash
 rostopic pub /stop_umrf_graph_topic temoto_action_engine/StopUmrfGraph "graph_name: 'dummy_nav_cycle'
 targets:
-- 'temoto_test'" 
+- 'my_temoto'" 
 ```
