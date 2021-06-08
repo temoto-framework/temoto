@@ -142,6 +142,8 @@ Open up another terminal and run:
 rosrun example_temoto_config_pkg er_manager_client __ns:=my_temoto
 ```
 
+***Note: Don't forget to source your catkin workspace***
+
 ### Code Explained
 >
 >``` c++
