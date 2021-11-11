@@ -88,10 +88,6 @@ git clone --recursive https://github.com/temoto-telerobotics/temoto
 
 # Build your workspace
 catkin build
-
-# Create a folder for temporary TeMoto configuration files in your home folder
-cd ~
-mkdir .temoto
 ``` 
 
 # Code Examples
