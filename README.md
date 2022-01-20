@@ -192,8 +192,7 @@ And that's all there is to our simplistic simulation - The action essentially pr
 
 Open up a terminal and run:
 ``` bash
-export TEMOTO_NAMESPACE=my_temoto
-roslaunch example_temoto_config_pkg temoto.launch temoto_namespace:=$TEMOTO_NAMESPACE
+roslaunch example_temoto_config_pkg temoto.launch 
 ```
 
 Open up another terminal and run:
