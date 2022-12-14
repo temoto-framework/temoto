@@ -1,9 +1,9 @@
 #include "ros/ros.h"
 #include "temoto_component_manager/component_manager_interface.h"
 
-void resourceFailureCallback(temoto_component_manager::LoadComponent load_resource_msg, temoto_resource_registrar::Status status_msgs)
+void resourceFailureCallback(temoto_component_manager::LoadComponent load_process_msg, temoto_resource_registrar::Status status_msgs)
 {
-  ROS_WARN_STREAM("The following resource stopped unexpectedly\n" << load_resource_msg.request);
+  ROS_WARN_STREAM("The following resource stopped unexpectedly\n" << load_process_msg.request);
 }
 
 int main(int argc, char** argv)

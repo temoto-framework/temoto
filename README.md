@@ -55,9 +55,9 @@ The TeMoto framework stems from three distinct concepts:
 
 ## TeMoto Resource Managers
 
-* **External Resource Manager** (ERM) allows to dynamically invoke programs (hereinafter External Resources or ERs), including ROS executables, ROS launch files and regular executables. Each requested program is a resource that ERM is managing.
+* **Process Manager** allows to dynamically invoke programs, including ROS executables, ROS launch files and regular executables. Each requested program is a resource that Process Manager is managing.
     
-* **Component Manager** is designed to maintain information about components and pipes. Components are resources that encompass ROS based programs (nodes/launch files) which provide sensing or data processing functionalities. Pipes are resources that encompass information about data processing pipelines, composed of components. Components describe regular ROS nodes or launch files. The Component Manager maintains this information including published/subscribed topics, ROS package names, and invokes them via ERM.
+* **Component Manager** is designed to maintain information about components and pipes. Components are resources that encompass ROS based programs (nodes/launch files) which provide sensing or data processing functionalities. Pipes are resources that encompass information about data processing pipelines, composed of components. Components describe regular ROS nodes or launch files. The Component Manager maintains this information including published/subscribed topics, ROS package names, and invokes them via Process Manager.
     
 * **Robot Manager** maintains information about robotic manipulators, grippers, and mobile bases and can dynamically provide access to all drivers comprising a single robot through a unified interface, i.e., Robot Manager Interface. A single device or an assembly of robotic devices compose a robot resource. It utilizes ROS MoveIt and ROS Navigation for manipulation- and navigation-related functionalities accordingly.
     
@@ -94,35 +94,35 @@ catkin build
 
 Here are few examples of how different tools of TeMoto framework can be embedded into your application. 
 
-## Using the External Resource Manager
+## Using the Process Manager
 
-This is a simple demonstration of ERM from client's perspective. ERM is used to load a ROS related program (rqt_graph) and also regular Ubuntu program (Gnome calcultator). First, here's the whole C++ demo application (explanations will follow):
+This is a simple demonstration of Process Manager (PM) from client's perspective. PM is used to load a ROS related program (rqt_graph) and also regular Ubuntu program (Gnome calcultator). First, here's the whole C++ demo application (explanations will follow):
 
 ``` c++
 #include "ros/ros.h"
-#include "temoto_er_manager/temoto_er_manager_interface.h"
+#include "temoto_process_manager/process_manager_interface.hpp"
 
-void resourceFailureCallback(temoto_er_manager::LoadExtResource load_resource_msg)
+void resourceFailureCallback(temoto_process_manager::LoadProcess load_process_msg)
 {
-  ROS_WARN_STREAM("The following resource stopped unexpectedly\n" << load_resource_msg.request);
+  ROS_WARN_STREAM("The following resource stopped unexpectedly\n" << load_process_msg.request);
 }
 
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "test_er_client_node");
 
-  temoto_er_manager::ERManagerInterface ermi(true);
-  ermi.registerUpdateCallback(resourceFailureCallback);
+  temoto_process_manager::ProcessManagerInterface pmi(true);
+  pmi.registerUpdateCallback(resourceFailureCallback);
 
   ROS_INFO("Loading gnome-calculator");
-  temoto_er_manager::LoadExtResource load_resource_msg = ermi.loadSysResource("gnome-calculator");
+  temoto_process_manager::LoadProcess load_process_msg = pmi.loadSysResource("gnome-calculator");
   ros::Duration(5).sleep();
 
   ROS_INFO("Unloading gnome-calculator");
-  ermi.unloadResource(load_resource_msg);
+  pmi.unloadResource(load_process_msg);
 
   ROS_INFO("Loading rqt_graph");
-  ermi.loadRosResource("rqt_graph", "rqt_graph");
+  pmi.loadRosResource("rqt_graph", "rqt_graph");
   ros::Duration(5).sleep();
 }
 ```
@@ -135,7 +135,7 @@ roslaunch example_temoto_config_pkg temoto.launch
 
 Open up another terminal and run:
 ``` bash
-rosrun example_temoto_config_pkg er_manager_client __ns:=my_temoto
+rosrun example_temoto_config_pkg process_manager_client __ns:=my_temoto
 ```
 
 ***Note: Don't forget to source your catkin workspace***
@@ -143,38 +143,38 @@ rosrun example_temoto_config_pkg er_manager_client __ns:=my_temoto
 ### Code Explained
 >
 >``` c++
->temoto_er_manager::ERManagerInterface ermi(true);
+>temoto_process_manager::ProcessManagerInterface pmi(true);
 >```
->Create External Resource Manager Interface object that provides a simplified API for communicating with the External Resource Manager. The boolean "true", that's passed to the constructor of ERM interface tells it whether it should be initialised immediately, or that's done later by the user.
+>Create PM Interface object that provides a simplified API for communicating with the Process Manager. The boolean "true", that's passed to the constructor of PM interface tells it whether it should be initialised immediately, or that's done later by the user.
 
 <br/>
 
 >``` c++
->ermi.registerUpdateCallback(resourceFailureCallback);
+>pmi.registerUpdateCallback(resourceFailureCallback);
 >```
 >You can register a custom routine (not required) where resource failures are reported.
 
 <br/>
 
 >``` c++
->temoto_er_manager::LoadExtResource load_resource_msg = ermi.loadSysResource("gnome-calculator");
+>temoto_process_manager::LoadProcess load_process_msg = pmi.loadSysResource("gnome-calculator");
 >
 >ros::Duration(5).sleep();
 >
->ermi.unloadResource(load_resource_msg);
+>pmi.unloadResource(load_process_msg);
 >```
 >Load the Gnome calculator as an example of a regular system program. Additional arguments can also be passed as a second `std::string` variable.
 >
->ER Manager allows to invoke ROS executables, ROS launch files and other programs. The `loadRosResource` and `loadSysResource` methods return a `temoto_er_manager::LoadExtResource` object which contains the details regarding the query. This can be later used to unload the resource.
+>ER Manager allows to invoke ROS executables, ROS launch files and other programs. The `loadRosResource` and `loadSysResource` methods return a `temoto_process_manager::LoadProcess` object which contains the details regarding the query. This can be later used to unload the resource.
 
 <br/>
 
 >``` c++
->ermi.loadRosResource("rqt_graph", "rqt_graph");
+>pmi.loadRosResource("rqt_graph", "rqt_graph");
 >```
 >Load a ROS program an example of a ROS executable (regularly invoked via `rosrun`). The first parameter indicates the ROS package name and the second indicates the executable. Additional arguments can also be passed as a third `std::string` variable. The same method can be used to load ROS launch files.
 >
->Note that this time the `unloadResource` was not invoked, as the destructor of `ermi` object automatically unloads all loaded resources.
+>Note that this time the `unloadResource` was not invoked, as the destructor of `pmi` object automatically unloads all loaded resources.
 
 <br/>
 

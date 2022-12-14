@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  temoto_er_manager
+  temoto_process_manager
   temoto_component_manager
 )
 
@@ -24,17 +24,17 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-# Build external resource manager client
-add_executable(er_manager_client
-  src/er_manager_client.cpp
+# Build process manager client
+add_executable(process_manager_client
+  src/process_manager_client.cpp
 )
 
-add_dependencies(er_manager_client 
+add_dependencies(process_manager_client 
   ${catkin_EXPORTED_TARGETS}
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
 )
 
-target_link_libraries(er_manager_client 
+target_link_libraries(process_manager_client 
   ${catkin_LIBRARIES}
 )
 
