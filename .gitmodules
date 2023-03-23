@@ -1,9 +1,6 @@
 [submodule "temoto_utils"]
 	path = temoto_utils
 	url = https://github.com/temoto-telerobotics/temoto_utils
-[submodule "temoto_action_engine"]
-	path = temoto_action_engine
-	url = https://github.com/temoto-telerobotics/temoto_action_engine
 [submodule "temoto_component_manager"]
 	path = temoto_component_manager
 	url = https://github.com/temoto-telerobotics/temoto_component_manager
@@ -21,3 +18,6 @@
 [submodule "temoto_process_manager"]
 	path = temoto_process_manager
 	url = https://github.com/temoto-framework/temoto_process_manager
+[submodule "temoto_action_engine_ros1"]
+	path = temoto_action_engine_ros1
+	url = https://github.com/temoto-framework/temoto_action_engine_ros1
