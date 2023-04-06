@@ -1,8 +1,0 @@
-<launch>
-  <arg name="umrf_base_path" default="$(find ta_dummy_navigation)/test"/>
-  <arg name="umrf_graph_file" default="ta_dummy_navigation.umrfg.json"/>
-  <arg name="wake_word" default="temoto_ws"/>
-
-  <node name="parser_node" pkg="temoto_action_engine" type="parser_node" output="screen"
-        args="$(arg umrf_base_path)/$(arg umrf_graph_file) $(arg wake_word)"/>
-</launch>
