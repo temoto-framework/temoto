@@ -21,3 +21,6 @@
 [submodule "temoto_action_engine_ros1"]
 	path = temoto_action_engine_ros1
 	url = https://github.com/temoto-framework/temoto_action_engine_ros1
+[submodule "temoto_visualization_manager"]
+	path = temoto_visualization_manager
+	url = https://github.com/temoto-framework/temoto_visualization_manager
